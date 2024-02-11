@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const feederRoutes = require('./techRoutes');
+const techRoutes = require('./techRoutes');
 
-router.use('/',techRoutes);
+router.use('/', techRoutes);
 
 module.exports = router;

@@ -1,6 +1,7 @@
-const { User, Pet, Feeder } = require('../models');
-
+const { User, Comment, Blog } = require('../models');
+const express = require('express')
 const router = require('express').Router();
+
 
 // Router to display Login page
 router.get('/', async( req, res) =>{
@@ -64,3 +65,20 @@ router.post('/signup', async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+// Router for the homepage and Router to get all the Pet profile info
+router.get('/homepage', async (req, res) => {
+    try {
+        const blogData = await Blog.findAll({
+            where: {
+                id: req.session.sessionUserId,
+            }
+        });
+        const userData = blogData.map(blog => blog.get({ plain: true })); 
+        res.render('homepage', {userData, loggedIn: req.session.loggedIn, sessionUserId: req.session.sessionUserId, sessionUserName: req.session.sessionUserName});
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+module.exports = router;
