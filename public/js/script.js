@@ -56,7 +56,28 @@ function comparePassword(password, confirmPassword) {
     }
 }
 
+const blogPostHandler = async (event) => {
+    event.preventDefault();
 
+    const blogTitle = document.querySelector('#blogTitle').value.trim(); //blogName
+    const blogId = document.querySelector('#blogId').value; //blogId
+    const blogComment = document.querySelector('#blogComment').value; //blog comments
+    const blogUsername = document.querySelector('#blogUsername').value.trim(); //blogUsername
+    
+    if (blogTitle && blogId && blogComment && blogUsername) {
+        const response = await fetch('/profile', {
+            method: 'POST',
+            body: JSON.stringify({ blogTitle, blogId, blogComment, blogUsername }),
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        if (response.ok) {
+            window.location.replace('homepage');
+        } else {
+            alert('Blog failed to post!');
+        }
+    }
+};
 
 if (loginbutton) {
     loginbutton.addEventListener('click', checkLoginUser);
