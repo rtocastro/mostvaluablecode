@@ -27,16 +27,14 @@ const checkLoginUser = async (event) => {
 const registerSignUpUser = async (event) => {
     event.preventDefault();
 
-    const firstName = document.querySelector('#firstfield').value.trim();
-    const lastName = document.querySelector('#lastfield').value.trim();
     const username = document.querySelector('#signupemail').value.trim();
     const password = document.querySelector('#signuppass').value.trim();
     const confpassword = document.querySelector('#signuppassconf').value.trim();
 
-    if (firstName && lastName && username && comparePassword(password, confpassword)) {
+    if (username && comparePassword(password, confpassword)) {
         const response = await fetch('/signup', {
             method: 'POST',
-            body: JSON.stringify({ firstName, lastName, username, password }),
+            body: JSON.stringify({ username, password }),
             headers: { 'Content-Type': 'application/json' },
         });
 
