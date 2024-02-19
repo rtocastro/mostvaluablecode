@@ -1,0 +1,22 @@
+    <!-- Loop over each object in the projects array -->
+    {{#each Blog as |blog| }}
+    <div class="row mb-4 project">
+        <div class="col-md-5">
+            <h2>
+                <!-- Call helper function -->
+                <a href="/blog/{{blog.id}}">{{blog.title}}</a>
+            </h2>
+
+        </div>
+        <div class="col-md-7">
+            <p>
+                {{blog.contents}}
+            </p>
+            {{/each}}
+
+            {{#each User as |User| }}
+            <p>Created by {{user.username}}</p>
+        </div>
+        {{/each}}
+
+    </div>

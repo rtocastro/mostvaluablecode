@@ -8,6 +8,7 @@ router.get('/', async( req, res) =>{
     res.render('login');
 });
 
+
 // Router to check whether the login user is valid user or not
 router.post('/login', async (req, res) => { 
     try {
@@ -32,7 +33,6 @@ router.post('/login', async (req, res) => {
         req.session.save(() => {
             req.session.loggedIn = true;
             req.session.sessionUserId = loginUserData.dataValues.id;
-            req.session.sessionUserName = loginUserData.dataValues.first_name + " " + loginUserData.dataValues.last_name;
             res.status(200).json({ user: loginUserData, message: 'You are now logged in!' });
         });
 
@@ -47,8 +47,6 @@ router.post('/signup', async (req, res) => {
     try {
         //console.log("User Details===", {...req.body});
         const createSignUpUser = await User.create({
-            first_name: req.body.firstName,
-            last_name: req.body.lastName,
             username: req.body.username,
             password: req.body.password,
         });
@@ -57,7 +55,6 @@ router.post('/signup', async (req, res) => {
         req.session.save(() => {
             req.session.loggedIn = true;
             req.session.sessionUserId = createSignUpUser.dataValues.id;
-            req.session.sessionUserName = createSignUpUser.dataValues.first_name + " " + createSignUpUser.dataValues.last_name;
             res.status(200).json({ user: createSignUpUser, message: 'You are now signed in!' });
         });
     } catch (err) {
@@ -80,5 +77,16 @@ router.get('/homepage', async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+//Route to render the profile handlebar
+router.get('/profile', async (req, res) => {
+    res.render('profile', {loggedIn: req.session.loggedIn, sessionUserId: req.session.sessionUserId, sessionUserName: req.session.sessionUserName});
+});
+
+//Route to render the dev handlebar
+router.get('/dev', async (req, res) => {
+    res.render('dev', {loggedIn: req.session.loggedIn, sessionUserId: req.session.sessionUserId, sessionUserName: req.session.sessionUserName});
+});
+
 
 module.exports = router;

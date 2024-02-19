@@ -54,20 +54,20 @@ function comparePassword(password, confirmPassword) {
         alert('Entered Password and Confirm Password does not match!');
         return false;
     }
-}
+};
 
 const blogPostHandler = async (event) => {
     event.preventDefault();
 
     const blogTitle = document.querySelector('#blogTitle').value.trim(); //blogName
-    const blogId = document.querySelector('#blogId').value; //blogId
+    // const blogId = document.querySelector('#blogId').value; //blogId
     const blogComment = document.querySelector('#blogComment').value; //blog comments
-    const blogUsername = document.querySelector('#blogUsername').value.trim(); //blogUsername
-    
-    if (blogTitle && blogId && blogComment && blogUsername) {
-        const response = await fetch('/profile', {
+    //const blogUsername = document.querySelector('#blogUsername').value.trim(); //blogUsername
+
+    if (blogTitle && blogComment ) {
+        const response = await fetch('/createpost', {
             method: 'POST',
-            body: JSON.stringify({ blogTitle, blogId, blogComment, blogUsername }),
+            body: JSON.stringify({ blogTitle, blogComment }),
             headers: { 'Content-Type': 'application/json' },
         });
 
