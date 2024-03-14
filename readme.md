@@ -4,6 +4,13 @@
 
 a site to discuss tech stuff and putting in comments for your fellow classmates/friends to react to.
 
+Deployed Site:
+https://mostvaluablecode.onrender.com/
+
+github URL
+
+https://github.com/rtocastro/mostvaluablecode
+
 ## Table of Contents (Optional)
 
 - [Installation](#installation)
